@@ -6,31 +6,37 @@ using UnityEngine.UI;
 
 public class Score : MonoBehaviour {
 
+	public static Score instance;
+
 	public Text scoreText;
 	public Text highScoreText;
 
-	public float scoreCount;
-	public float highScoreCount;
+	private int score;
+	private int highScore;
 
-	public float pointsPerSecond;
-	public bool scoreIncreasing;
-
-	public void Start(){
-		if (PlayerPrefs.GetFloat ("highScore") != null) {
-			highScoreCount = PlayerPrefs.GetFloat ("highScore");
-		}
-	}
-	public void Update () {
-	if(scoreIncreasing){
-		scoreCount += pointsPerSecond * Time.deltaTime;
+	void Awake() {
+		MakeInstance ();
 	}
 
-		if(scoreCount > highScoreCount){
-			highScoreCount = scoreCount;
-			PlayerPrefs.SetFloat ("highScore", highScoreCount);
-		}
-		scoreText.text = "Score: " + (int)scoreCount;
-		highScoreText.text = "High Score: " + (int)highScoreCount;
-}
+	void MakeInstance() {
+		if (instance == null)
+			instance = this;
+	}
 
-}
+	public void IncrementScore() {
+		score++;
+		scoreText.text = "Score: " + score;
+
+		if (score > highScore) {
+			highScore = score;
+			highScoreText.text = "High Score: " + highScore;
+		}
+	}
+
+	public int GetScore() {
+		return this.score;
+
+	}
+
+
+} //ScoreManager
