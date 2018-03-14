@@ -14,6 +14,13 @@ public class Score : MonoBehaviour {
 	private int score;
 	private int highScore;
 
+	public void Start(){
+
+		if (PlayerPrefs.GetFloat ("highScore") != 0) {
+			highScore = PlayerPrefs.GetInt("highScore");
+		}
+	}
+
 	void Awake() {
 		MakeInstance ();
 	}
