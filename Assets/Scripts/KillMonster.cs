@@ -16,7 +16,11 @@ public class KillMonster : MonoBehaviour {
 	public string gameOver;
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		Destroy(this.gameObject);
-		SceneManager.LoadScene(gameOver);
+        if(other.tag == "player")
+        {
+            Destroy(this.gameObject);
+            SceneManager.LoadScene(gameOver);
+        }
+		
 }
 }

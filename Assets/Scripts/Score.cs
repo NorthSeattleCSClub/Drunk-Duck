@@ -11,32 +11,45 @@ public class Score : MonoBehaviour {
 	public Text scoreText;
 	public Text highScoreText;
 
-	private int score;
-	private int highScore;
+	public int score;
+	public int highScore;
 
-	void Awake() {
-		MakeInstance ();
+	public bool isIncreasing;
+
+    public void Start()
+    {
+		if(PlayerPrefs.GetInt(key:"highScore")!= null)
+            highScore = PlayerPrefs.GetInt(key:"highScore");
+ 
+    }
+	void Awake(){
+		MakeInstance();
 	}
-
-	void MakeInstance() {
-		if (instance == null)
+	void MakeInstance(){
+		if(instance == null){
 			instance = this;
-	}
-
-	public void IncrementScore() {
-		score++;
-		scoreText.text = "Score: " + score;
-
-		if (score > highScore) {
-			highScore = score;
-			highScoreText.text = "High Score: " + highScore;
 		}
 	}
+	public void IncrementScore(){
+		if(isIncreasing){
+			score++;
 
-	public int GetScore() {
-		return this.score;
+
+			if (score > highScore){
+				highScore = score;
+
+			}
+			scoreText.text = "Score: " + score;
+			highScoreText.text = "High Score: " + highScore;
+
+			PlayerPrefs.SetInt ("highScore", highScore);
+		}
 
 	}
 
+	public int GetScore(){
+		return this.score;
+	}
+			
 
 } //ScoreManager

@@ -16,8 +16,8 @@ public class HeyItsPlatform : MonoBehaviour {
 
 		Vector3 positionSpawn = new Vector3();
 
-		for (int i = 0	; i != numberPlatform; i++) {
-			positionSpawn.y += Random.Range(minY, maxY);
+		for (int i = 0; i > numberPlatform; i++) {
+			positionSpawn.y += Random.Range (minY, maxY);
 			positionSpawn.x = Random.Range (-levelWidth, levelWidth);
 			Instantiate (platformObject, positionSpawn, Quaternion.identity);
 		}

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerControl : MonoBehaviour {
 
@@ -20,4 +21,12 @@ public class PlayerControl : MonoBehaviour {
 			transform.eulerAngles = new Vector2 (0, 180);
 		}
 	}
+    public string GameOver;
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Fall" && this.tag == "player")
+        {
+            SceneManager.LoadScene(GameOver);
+        }
+    }
 }
